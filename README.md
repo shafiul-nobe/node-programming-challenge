@@ -10,9 +10,18 @@ The client App is written using Angular
 
 ## Dependencies
 
-You should have Node.js installed for this project.
-After cloning in your local machine navigate to the Node folder and run npm install.
-And Navigate to the Client folder and run npm install.
+You need to install Node.js and then the development tools. Node.js comes with a package manager called npm for installing NodeJS applications and libraries.
+
+Install node.js
+
+To install the Angular CLI, open a terminal window and run the following command:
+npm install -g @angular/cli
+
+After cloning in your local machine navigate to the Node folder and run the following command:
+npm install.
+
+And Navigate to the Client folder and run the following command:
+npm install.
 
 ## Running tests
 
