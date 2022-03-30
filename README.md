@@ -20,4 +20,4 @@ For running and testing this project you can use VS Code.
 Navigate to the Node folder and run npm start.
 And Navigate to the Client folder and run ng serve.
 
-After that, you can test the project in the browser via http://localhost:3000/
+After that, you can test the project in the browser via http://localhost:4200/
