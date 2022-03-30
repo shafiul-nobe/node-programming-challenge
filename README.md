@@ -17,10 +17,10 @@ Install node.js
 To install the Angular CLI, open a terminal window and run the following command:
 npm install -g @angular/cli
 
-After cloning in your local machine navigate to the Node folder and run the following command:
+After cloning in your local machine navigate to the Node folder,open a terminal window and run the following command:
 npm install.
 
-And Navigate to the Client folder and run the following command:
+And Navigate to the Client folder,open a terminal window and run the following command:
 npm install.
 
 ## Running tests
