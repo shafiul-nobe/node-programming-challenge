@@ -78,28 +78,31 @@ const generateRandomOutputType = (size) => {
   }
 };
 
-const generateFile = () => {
-  var output = "";
-  console.log("Generating output file of size " + bytes(File_Size));
-  while (output.length < File_Size) {
-    var size = getRandomInt(0, 100);
-    var diff = File_Size - output.toString().length - 1;
-    if (diff == 0) {
-      return;
+const generateFiles = () => {
+  return new Promise((resolve, reject) => {
+    var output = "";
+    console.log("Generating output file of size " + bytes(File_Size));
+    while (output.length < File_Size) {
+      var size = getRandomInt(0, 100);
+      var diff = File_Size - output.toString().length;
+      if (diff == 0) {
+        return;
+      }
+      size = size < diff ? size : diff;
+      var randomValue = generateRandomOutputType(size);
+      output = output + randomValue + ",";
     }
-    size = size < diff ? size : diff;
-    var randomValue = generateRandomOutputType(size);
-    output = output + randomValue + ",";
-  }
-  console.log("Final output size is:", bytes(output.toString().length));
-  return output;
+    console.log("Final output size is:", bytes(output.toString().length));
+    resolve(output);
+  });
 };
 
 exports.generateFile = (req, res, next) => {
-  var output = generateFile();
-  fs.writeFileSync("../outputs/output.txt", output);
-  res.status(200).json({
-    posts: [{ title: "First Post", content: "this is the first post!" }],
+  generateFiles().then((output) => {
+    fs.writeFileSync("../outputs/output.txt", output);
+    res.status(200).json({
+      posts: { title : "generated" },
+    });
   });
 };
 
@@ -109,15 +112,14 @@ exports.downloadFile = (req, res, next) => {
 };
 
 exports.getReport = (req, res, next) => {
-  generateReport().then( result => {
+  generateReport().then((result) => {
     res.status(200).json({
-      report: result
+      report: result,
     });
-  })
-  
+  });
 };
 
-const generateReport = () =>{
+const generateReport = () => {
   var report = {
     alphaNumericCount: 0,
     intCount: 0,
@@ -131,19 +133,19 @@ const generateReport = () =>{
       var outputArray = outputString.split(",");
       outputArray.forEach((item) => {
         if (isAlphaNumeric(item)) {
-          report.alphaNumericCount ++;
+          report.alphaNumericCount++;
         }
         if (isAlphabeticalString(item)) {
-          report.alphabeticalCount ++;
+          report.alphabeticalCount++;
         }
         if (isInteger(item)) {
-          report.intCount ++;
+          report.intCount++;
         }
         if (isRealNumber(item)) {
-          report.realNumberCount ++;
+          report.realNumberCount++;
         }
       });
       resolve(report);
     });
   });
-}
+};
